@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Reservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        #seating-chart {
+            display: flex;
+            justify-content: space-center;
+            margin: 20px 120px;
+        }
+
+        .column {
+            display: flex;
+            margin: 0 40px;
+            flex-direction: column;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .seat {
+            width: 30px;
+            height: 30px;
+            background-color: #ccc;
+            margin: 5px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .seat.reserved {
+            background-color: #ff0000;
+            cursor: not-allowed;
+        }
+
+        .seat.selected {
+            background-color: #00ff00;
+        }
+
+        #date-time-selection {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <section id="seating-chart">
+            <div class="column">
+                <div class="row">
+                    <div class="seat" data-seat="L1"></div>
+                    <div class="seat" data-seat="L2"></div>
+                    <div class="seat" data-seat="L3"></div>
+                    <div class="seat" data-seat="L4"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="L5"></div>
+                    <div class="seat" data-seat="L6"></div>
+                    <div class="seat" data-seat="L7"></div>
+                    <div class="seat" data-seat="L8"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="L9"></div>
+                    <div class="seat" data-seat="L10"></div>
+                    <div class="seat" data-seat="L11"></div>
+                    <div class="seat" data-seat="L12"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="L13"></div>
+                    <div class="seat" data-seat="L14"></div>
+                    <div class="seat" data-seat="L15"></div>
+                    <div class="seat" data-seat="L16"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="L17"></div>
+                    <div class="seat" data-seat="L18"></div>
+                    <div class="seat" data-seat="L19"></div>
+                    <div class="seat" data-seat="L20"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="L21"></div>
+                    <div class="seat" data-seat="L22"></div>
+                    <div class="seat" data-seat="L23"></div>
+                    <div class="seat" data-seat="L24"></div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="row">
+                    <div class="seat" data-seat="R1"></div>
+                    <div class="seat" data-seat="R2"></div>
+                    <div class="seat" data-seat="R3"></div>
+                    <div class="seat" data-seat="R4"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="R5"></div>
+                    <div class="seat" data-seat="R6"></div>
+                    <div class="seat" data-seat="R7"></div>
+                    <div class="seat" data-seat="R8"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="R9"></div>
+                    <div class="seat" data-seat="R10"></div>
+                    <div class="seat" data-seat="R11"></div>
+                    <div class="seat" data-seat="R12"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="R13"></div>
+                    <div class="seat" data-seat="R14"></div>
+                    <div class="seat" data-seat="R15"></div>
+                    <div class="seat" data-seat="R16"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="R17"></div>
+                    <div class="seat" data-seat="R18"></div>
+                    <div class="seat" data-seat="R19"></div>
+                    <div class="seat" data-seat="R20"></div>
+                </div>
+                <div class="row">
+                    <div class="seat" data-seat="R21"></div>
+                    <div class="seat" data-seat="R22"></div>
+                    <div class="seat" data-seat="R23"></div>
+                    <div class="seat" data-seat="R24"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="date-time-selection">
+            <h2>Select Date and Time</h2>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date">
+            <label for="time">Time:</label>
+            <select id="time" name="time">
+                <option value="20:00">8:00 PM</option>
+                <option value="20:45">8:45 PM</option>
+                <option value="22:00">10:00 PM</option>
+            </select>
+            <label for="quality">Quality:</label>
+            <select id="quality" name="quality">
+                <option value="standard">Standard</option>
+                <option value="premium">Premium</option>
+            </select>
+        </section>
+
+        <button id="checkout">Checkout</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const socket = io('http://localhost:3000', {
+                withCredentials: true,
+            });
+            const seats = document.querySelectorAll('.seat');
+            const checkoutButton = document.getElementById('checkout');
+            const dateInput = document.getElementById('date');
+            const timeInput = document.getElementById('time');
+            console.log('app started');
+            socket.on('connect', () => {
+                console.log('Connected to server');
+            });
+
+            // Handle initial seat availability
+            function fetchSeats() {
+                const date = dateInput.value;
+                const time = timeInput.value;
+                if (date && time) {
+                    socket.emit('getSeats', { date, time });
+                }
+            }
+
+            dateInput.addEventListener('change', fetchSeats);
+            timeInput.addEventListener('change', fetchSeats);
+
+            socket.on('initialSeats', (seats) => {
+                console.log('initial seats', seats);
+                document.querySelectorAll('.seat').forEach(seat => {
+                    seat.classList.remove('reserved');
+                    seat.classList.remove('selected');
+                });
+                Object.keys(seats).forEach(seat => {
+                    const seatElement = document.querySelector(`.seat[data-seat="${seat}"]`);
+                    if (seatElement) {
+                        if (!seats[seat]) {
+                            seatElement.classList.add('reserved');
+                        }
+                    }
+                });
+            });
+
+            socket.on('seatsReserved', (reservedSeats) => {
+                console.log('seats reserved', reservedSeats);
+                const currentDate = dateInput.value;
+                const currentTime = timeInput.value;
+                if (reservedSeats.date === currentDate && reservedSeats.time === currentTime) {
+                    reservedSeats.seats.forEach(seat => {
+                        const seatElement = document.querySelector(`.seat[data-seat="${seat}"]`);
+                        console.log('seat element', seatElement);
+                        if (seatElement) {
+                            seatElement.classList.add('reserved');
+                            seatElement.classList.remove('selected');
+                        }
+                    });
+                }
+            });
+
+            seats.forEach(seat => {
+                seat.addEventListener('click', () => {
+                    if (!seat.classList.contains('reserved')) {
+                        seat.classList.toggle('selected');
+                    }
+                });
+            });
+
+            checkoutButton.addEventListener('click', () => {
+                const selectedSeats = Array.from(document.querySelectorAll('.seat.selected')).map(seat => seat.dataset.seat);
+                const date = dateInput.value;
+                const time = timeInput.value;
+                const quality = document.getElementById('quality').value;
+                socket.emit('reserveSeat', { date, time, seats: selectedSeats });
+                console.log('checkout clicked');
+            });
+        });
+    </script>
+</body>
+
+</html>
