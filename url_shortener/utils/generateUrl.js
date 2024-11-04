@@ -1,6 +1,6 @@
 const Url = require('../models/Urlmodel');
 const generateUrl = () => {
-    const baseUrl = 'https://urlsh.com';
+    // const baseUrl = 'https://urlsh.com';
     const randomString = Math.random().toString(36).substring(2, 8);
     return `${randomString}`;
 };
