@@ -22,7 +22,7 @@ export class SeatsService {
     times.forEach(time => {
       this.movie[today][time] = {};
       seatIds.forEach(seatId => {
-        this.movie[today][time][seatId] = true; // true means available
+        this.movie[today][time][seatId] = true;
       });
     });
   }
@@ -40,7 +40,7 @@ export class SeatsService {
     if (!this.movie[date][time]) {
       this.movie[date][time] = {};
       seatIds.forEach(seatId => {
-        this.movie[date][time][seatId] = true; // true means available
+        this.movie[date][time][seatId] = true;
       });
     }
   }
