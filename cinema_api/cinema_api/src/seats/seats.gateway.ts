@@ -4,7 +4,7 @@ import { Socket } from 'socket.io';
 import { Server } from 'socket.io';
 @WebSocketGateway({
   cors: {
-    origin: 'http://127.0.0.1:5500', // Replace with your frontend's origin
+    origin: 'http://127.0.0.1:5500', 
     methods: ['GET', 'POST'],
     credentials: true,
   },
